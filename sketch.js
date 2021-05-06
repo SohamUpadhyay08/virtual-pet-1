@@ -22,7 +22,7 @@ function setup() {
 
   database = firebase.database();
 
-  foodStock = database.ref("food")
+  foodStock = database.ref('Food')
   foodStock.on("value",readStock)
 
   
@@ -32,12 +32,12 @@ function setup() {
 function draw() { 
   background("green") 
   
-  if(foodS !== undefined){
+  
   textSize(25)
   fill("white")
   text("press up arrow key to feed dog",80,30)
   text("food Remaining = " + foodS,100,100)
-  }
+  
 
   if(keyWentDown(UP_ARROW)){
     writeStock(foodS)
@@ -52,6 +52,7 @@ function draw() {
 
 function readStock(data){
   foodS = data.val();
+  //console.log(foodS)
 }
 
 function writeStock(x){
@@ -59,11 +60,11 @@ function writeStock(x){
    x = 0;
   }
   else{
-    x = x+1
+    x = x-1
   }
 
   database.ref('/').update({
-    food:x
+    Food:x
   })
 }
 
